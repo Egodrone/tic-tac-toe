@@ -55,7 +55,6 @@
                 if (val === "x") {
                     x = val;
                     o = "o";
-                    console.log("Player x is selected");
                     document.getElementById("information").innerHTML = "Player X is selected";
                 }
                 if (val === "o") {
@@ -63,29 +62,24 @@
                     x = "x";
                     flipUser = false;
                     document.getElementById("information").innerHTML = "Player O is selected";
-                    console.log("Player o is selected");
                 }
             } else {
                 if (gameOn) {
                     if (flipUser) {
                         if (gameArr[val.getAttribute('data-value') - 1] == "") {
-                            console.log("Get attribute before:", gameArr[val.getAttribute('data-value') - 1]);
                             val.innerHTML = "X";
                         } else {
                             return;
                         }
                     } else {
                         if (gameArr[val.getAttribute('data-value') - 1] == "") {
-                            console.log("Get attribute before:", gameArr[val.getAttribute('data-value') - 1]);
                             val.innerHTML = "O";
                         } else {
                             return;
                         }
                     }
 
-                    //console.log("Get attribute:", gameArr[val.getAttribute('data-value') - 1]);
                     gameArr[val.getAttribute('data-value') - 1] = val.innerHTML;
-                    //console.log("Get attribute:", gameArr[val.getAttribute('data-value') - 1]);
 
                     for (let i = 0; i <= 7; i++) {
                         let testArr = winMatris[i];
@@ -104,9 +98,6 @@
 
             }
 
-            for (let i = 0; i < gameArr.length; i++) {
-                console.log("Number:", i, "Value:", gameArr[i]);
-            }
         }
     </script>
 </head>
