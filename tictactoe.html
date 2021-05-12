@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic Tac Toe</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <script>
+        /*
+        [1, 2, 3]
+        [4, 5, 6]
+        [7, 8, 9]
+        */
+        let gameArr = ["", "", "", "", "", "", "", "", ""];
+        let x;
+        let o;
+        let flipUser = true;
+        let gameOn = true;
+
+        const winMatris = [
+            [0, 1, 2],
+            [3, 4, 5],
+            [6, 7, 8],
+            [0, 3, 6],
+            [1, 4, 7],
+            [2, 5, 8],
+            [0, 4, 8],
+            [2, 4, 6]
+        ];
+
+
+        function reset() {
+            console.log("------ Reset --------");
+            gameArr = ["", "", "", "", "", "", "", "", ""];
+            x = undefined;
+            o = undefined;
+            flipUser = true;
+            gameOn = true;
+            document.getElementById("information").innerHTML = "Reset is done, choose a new player!";
+
+            for (let i = 0; i < 9; i++) {
+                document.getElementsByClassName("game")[i].innerHTML = "";
+            }
+        }
+
+
+        function display(val) {
+
+            console.log(val);
+            if (x == undefined || o == undefined) {
+
+                if (val === "x") {
+                    x = val;
+                    o = "o";
+                    console.log("Player x is selected");
+                    document.getElementById("information").innerHTML = "Player X is selected";
+                }
+                if (val === "o") {
+                    o = val;
+                    x = "x";
+                    flipUser = false;
+                    document.getElementById("information").innerHTML = "Player O is selected";
+                    console.log("Player o is selected");
+                }
+            } else {
+                if (gameOn) {
+                    if (flipUser) {
+                        if (gameArr[val.getAttribute('data-value') - 1] == "") {
+                            console.log("Get attribute before:", gameArr[val.getAttribute('data-value') - 1]);
+                            val.innerHTML = "X";
+                        } else {
+                            return;
+                        }
+                    } else {
+                        if (gameArr[val.getAttribute('data-value') - 1] == "") {
+                            console.log("Get attribute before:", gameArr[val.getAttribute('data-value') - 1]);
+                            val.innerHTML = "O";
+                        } else {
+                            return;
+                        }
+                    }
+
+                    //console.log("Get attribute:", gameArr[val.getAttribute('data-value') - 1]);
+                    gameArr[val.getAttribute('data-value') - 1] = val.innerHTML;
+                    //console.log("Get attribute:", gameArr[val.getAttribute('data-value') - 1]);
+
+                    for (let i = 0; i <= 7; i++) {
+                        let testArr = winMatris[i];
+                        let a = gameArr[testArr[0]];
+                        let b = gameArr[testArr[1]];
+                        let c = gameArr[testArr[2]];
+
+                        if (a != "" && b != "" && c != "" && a === b && c === b) {
+                            document.getElementById("information").innerHTML = "Player " + val.innerHTML + " Won!";
+                            gameOn = false;
+                        }
+                    }
+
+                    flipUser = !flipUser;
+                }
+
+            }
+
+            for (let i = 0; i < gameArr.length; i++) {
+                console.log("Number:", i, "Value:", gameArr[i]);
+            }
+        }
+    </script>
+</head>
+
+
+<body>
+<table>
+
+    <tr>
+        <td>
+            <div class="game" id="1" data-value="1" onclick="display(this)"></div>
+        </td>
+        <td>
+            <div class="game" id="2" data-value="2" onclick="display(this)"></div>
+        </td>
+        <td>
+            <div class="game" id="3" data-value="3" onclick="display(this)"></div>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <div class="game" id="4" data-value="4" onclick="display(this)"></div>
+        </td>
+        <td>
+            <div class="game" id="5" data-value="5" onclick="display(this)"></div>
+        </td>
+        <td>
+            <div class="game" id="6" data-value="6" onclick="display(this)"></div>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <div class="game" id="7" data-value="7" onclick="display(this)"></div>
+        </td>
+        <td>
+            <div class="game" id="8" data-value="8" onclick="display(this)"></div>
+        </td>
+        <td>
+            <div class="game" id="9" data-value="9" onclick="display(this)"></div>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <input class="btn" type="button" value="X" data-value="x" onclick="display('x')"/>
+        </td>
+        <td>
+            <input class="btn" type="button" value="O" data-value="o" onclick="display('o')"/>
+        </td>
+        <td>
+            <input class="btn" type="button" value="RESET" data-value="r" onclick="reset()"/>
+        </td>
+    </tr>
+</table>
+
+
+<div class="info" id="information"> Select player X or O </div>
+</body>
+</html>
