@@ -17,6 +17,7 @@
         let gameArr = ["", "", "", "", "", "", "", "", ""];
         let x;
         let o;
+        let countRounds = 0;
         let flipUser = true;
         let gameOn = true;
 
@@ -37,6 +38,7 @@
             gameArr = ["", "", "", "", "", "", "", "", ""];
             x = undefined;
             o = undefined;
+            countRounds = 0;
             flipUser = true;
             gameOn = true;
             document.getElementById("information").innerHTML = "Reset is done, choose a new player!";
@@ -68,12 +70,14 @@
                     if (flipUser) {
                         if (gameArr[val.getAttribute('data-value') - 1] == "") {
                             val.innerHTML = "X";
+                            countRounds++;
                         } else {
                             return;
                         }
                     } else {
                         if (gameArr[val.getAttribute('data-value') - 1] == "") {
                             val.innerHTML = "O";
+                            countRounds++;
                         } else {
                             return;
                         }
@@ -87,10 +91,15 @@
                         let b = gameArr[testArr[1]];
                         let c = gameArr[testArr[2]];
 
-                        if (a != "" && b != "" && c != "" && a === b && c === b) {
+                        if (a != "" && a === b && c === b) {
                             document.getElementById("information").innerHTML = "Player " + val.innerHTML + " Won!";
                             gameOn = false;
+                            return;
                         }
+                        if (countRounds === 9) {
+                            document.getElementById("information").innerHTML = "It's a draw!";
+                        }
+
                     }
 
                     flipUser = !flipUser;
