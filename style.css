@@ -2,7 +2,7 @@
     background-color:#5b38d9;
     width: 20px;
     height: 20px;
-    padding: 40px;
+    padding: 50px;
     border-radius: 10px;
     font-size: 36px;
 }
@@ -26,4 +26,6 @@
     font-size: 26px;
     width: 300px;
     border-radius: 10px;
+    margin: 4px 2px;
+    padding: 15px 32px;
 }
